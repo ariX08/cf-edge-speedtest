@@ -9,7 +9,6 @@ import {
   Settings,
   Play,
   RotateCcw,
-  Share2,
   Gauge
 } from 'lucide-react'
 
@@ -128,7 +127,6 @@ export default function App() {
         upLoadedLatency: summary.upLoadedLatency,
       })
 
-      // Approximate live direction for gauge
       if (type === 'download') {
         setLiveDirection('download')
         if (summary.download) setLiveSpeed(summary.download / 1e6)
@@ -137,7 +135,6 @@ export default function App() {
         if (summary.upload) setLiveSpeed(summary.upload / 1e6)
       }
 
-      // rough progress
       setProgress((p) => Math.min(p + 8, 95))
     }
 
@@ -170,7 +167,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col">
-      {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b border-white/5">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
@@ -188,9 +184,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main */}
       <main className="flex-1 flex flex-col items-center justify-center px-4 py-10 relative">
-        {/* GO / Results circle */}
         <div className="relative mb-10">
           <div
             className={`w-56 h-56 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
@@ -251,39 +245,33 @@ export default function App() {
           </div>
         </div>
 
-        {/* Live numbers row */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-12 w-full max-w-2xl">
           <Metric
             icon={<Download className="w-4 h-4 text-cyan-400" />}
             label="Download"
             value={formatMbps(results.download)}
             unit="Mbps"
-            accent="cyan"
           />
           <Metric
             icon={<Upload className="w-4 h-4 text-fuchsia-400" />}
             label="Upload"
             value={formatMbps(results.upload)}
             unit="Mbps"
-            accent="fuchsia"
           />
           <Metric
             icon={<Activity className="w-4 h-4 text-amber-400" />}
             label="Ping"
             value={formatMs(results.latency)}
             unit="ms"
-            accent="amber"
           />
           <Metric
             icon={<Wifi className="w-4 h-4 text-emerald-400" />}
             label="Jitter"
             value={formatMs(results.jitter)}
             unit="ms"
-            accent="emerald"
           />
         </div>
 
-        {/* Server + Connection */}
         <div className="flex flex-col sm:flex-row items-center gap-8 text-sm text-white/60">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
@@ -323,7 +311,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Quality indicators */}
         {phase === 'finished' && results.download != null && (
           <div className="mt-12 flex flex-wrap justify-center gap-4 text-xs">
             <QualityPill label="Browsing" good={(results.download ?? 0) > 10e6} />
@@ -334,7 +321,6 @@ export default function App() {
         )}
       </main>
 
-      {/* Footer */}
       <footer className="py-4 text-center text-xs text-white/30 border-t border-white/5">
         Powered by Cloudflare Edge · Official measurement engine · Results use 90th percentile
       </footer>
@@ -347,13 +333,11 @@ function Metric({
   label,
   value,
   unit,
-  accent,
 }: {
   icon: React.ReactNode
   label: string
   value: string
   unit: string
-  accent: string
 }) {
   return (
     <div className="flex flex-col items-center text-center">
