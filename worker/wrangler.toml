@@ -1,0 +1,6 @@
+name = "cf-edge-speedtest-api"
+main = "index.js"
+compatibility_date = "2025-10-01"
+
+# Optional: bind a custom domain later
+# routes = [{ pattern = "speed.yourdomain.com", custom_domain = true }]
